@@ -2,12 +2,14 @@
 const credentials = require("./credentials");
 
 const express = require("express");
+const cors = require("cors");
 
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport(credentials.transport);
 
 const app = express();
 
+app.use(cors({origin: "ossolighting.ca"}));
 app.use(express.json());
 
 const emailRouter = express.Router();
