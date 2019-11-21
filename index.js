@@ -3,7 +3,6 @@ const credentials = require("./credentials");
 
 const express = require("express");
 
-
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport(credentials.transport);
 
@@ -13,19 +12,22 @@ app.use(express.json());
 
 const emailRouter = express.Router();
 
-emailRouter.post('/', async function(req, res) {
-    console.log("Email")
+emailRouter.post("/", async function(req, res) {
     console.log(req.body);
+
     const {name, email, subject, message} = req.body;
 
-    const emailRes = await transporter.sendMail(
-        credentials.getMailObject({
-            name,
-            email,
-            subject,
-            message,
-        })
-    );
+    const emailRes = await transporter
+        .sendMail(
+            credentials.getMailObject({
+                name,
+                email,
+                subject,
+                message
+            })
+        )
+        .then(r => ({sent: true}))
+        .catch(e => ({error: true}));
 
     console.log(emailRes);
 
