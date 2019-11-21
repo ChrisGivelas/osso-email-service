@@ -1,6 +1,6 @@
 module.exports = {
     transport: {
-        host: "mail.ossolighting.ca.",
+        host: process.env.emailHost,
         port: 465,
         secure: true,
         tls: {
@@ -10,7 +10,7 @@ module.exports = {
     getMailObject: ({name, email, subject, message}) => {
         return {
             from: `${name} <${email}>`,
-            to: "chris@ossolighting.ca",
+            to: process.env.defaultTo,
             text: message,
             subject,
             html: `
