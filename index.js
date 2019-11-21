@@ -27,7 +27,10 @@ emailRouter.post("/", async function(req, res) {
             })
         )
         .then(r => ({sent: true}))
-        .catch(e => ({error: true}));
+        .catch(e => {
+            console.log(e);
+            return {error: true};
+        });
 
     console.log(emailRes);
 
