@@ -9,15 +9,14 @@ module.exports = {
     },
     getMailObject: ({name, email, subject, message}) => {
         return {
-            from: `${name} <${email}>`,
+            from: email,
             to: process.env.defaultTo,
-            text: message,
             subject,
             html: `
-                <h3>From: ${name} <a href="mailto:${email}">(${email})</a></h3>
-                <h3>Subject: ${subject}</h3>
-                <h3>Body:</h3>
-                <p>${message}</p>
+                <p style="width: 400px; overflow-wrap: break-word;">From: <b>${name}</b> <a href="mailto:${email}">(${email})</a></p>
+                <p style="width: 400px; overflow-wrap: break-word;">Subject: <b>${subject}</b></p>
+                <p>======================</p>
+                <p style="width: 400px; overflow-wrap: break-word;">${message}</p>
               `
         };
     }

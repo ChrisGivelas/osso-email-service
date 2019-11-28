@@ -9,12 +9,12 @@ const transporter = nodemailer.createTransport(credentials.transport);
 
 const app = express();
 
+app.options("*", cors());
 app.use(cors({origin: "ossolighting.ca"}));
-app.use(express.json());
 
 const emailRouter = express.Router();
 
-emailRouter.post("/", async function(req, res) {
+emailRouter.post("/", express.json(), async function(req, res) {
     console.log(req.body);
 
     const {name, email, subject, message} = req.body;
@@ -28,7 +28,10 @@ emailRouter.post("/", async function(req, res) {
                 message
             })
         )
-        .then(r => ({sent: true}))
+        .then(r => {
+            console.log(r);
+            return {sent: true};
+        })
         .catch(e => {
             console.log(e);
             return {error: true};
