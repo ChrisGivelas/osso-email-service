@@ -5,7 +5,8 @@ module.exports = {
         secure: true,
         tls: {
             rejectUnauthorized: false
-        }
+        },
+        name: "[osso-email-service.herokuapp.com]"
     },
     getMailObject: ({name, email, subject, message}) => {
         return {
