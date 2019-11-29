@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport(credentials.transport);
 const app = express();
 
 app.options("*", cors());
-app.use(cors({origin: "ossolighting.ca"}));
+app.use(cors({origin: ["ossolighting.ca", "chrisgivelas.github.io"]}));
 
 const emailRouter = express.Router();
 
