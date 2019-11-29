@@ -3,10 +3,14 @@ module.exports = {
         host: process.env.emailHost,
         port: 465,
         secure: true,
-        tls: {
-            rejectUnauthorized: false
+        auth: {
+            user: process.env.username,
+            pass: process.env.pass
         },
-        name: "[osso-email-service.herokuapp.com]"
+        tls: {
+            // do not fail on invalid certs
+            rejectUnauthorized: false
+        }
     },
     getMailObject: ({name, email, subject, message}) => {
         return {
